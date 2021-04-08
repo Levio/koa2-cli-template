@@ -2,7 +2,7 @@ import Router from 'koa-router'
 
 const router = new Router()
 
-const baseUrl = 'api/v1'
+const baseUrl = '/api/v1'
 
 router.get(`${baseUrl}/`, async (ctx, next) => {
   ctx.body = 'Hello Koa 2!'

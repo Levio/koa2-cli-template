@@ -1,7 +1,7 @@
 import Koa from 'koa'
 const app = new Koa()
 import json from 'koa-json'
-import onerror from 'koa-onerror'
+// import onerror from 'koa-onerror'
 import bodyparser from 'koa-bodyparser'
 import logger from 'koa-logger'
 import cors from 'kcors'
@@ -10,7 +10,7 @@ import index from './routes/index'
 import users from './routes/users'
 
 // error handler
-onerror(app)
+// onerror(app)
 
 // middlewares
 app.use(

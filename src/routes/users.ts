@@ -1,17 +1,17 @@
-import Router from 'koa-router'
+import Router from "koa-router";
 
-const router = new Router()
+const router = new Router();
 
-router.prefix('/users')
+console.log(process.env.BASE_API_PREFIX);
 
-router.prefix('/v2')
+router.prefix(`${process.env.BASE_API_PREFIX}/users`);
 
-router.get('/', function (ctx, next) {
-  ctx.body = 'this is a users response!'
-})
+router.get("/", function (ctx, next) {
+  ctx.body = "this is a users response!";
+});
 
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
-})
+router.get("/bar", function (ctx, next) {
+  ctx.body = "this is a users/bar response";
+});
 
-export default router
+export default router;

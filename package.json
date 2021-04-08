@@ -1,15 +1,22 @@
 {
-  "name": "aseit-backend",
+  "name": "koa2-cli-template",
   "version": "0.1.0",
+  "author": {
+    "name": "Levi",
+    "email": "js_levi@163.com"
+  },
+  "description": "template for koa2+typescript+mysql+restful",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "start": "ts-node bin/www",
     "dev": "nodemon --watch src -e js,jsx,ts,tsx --exec ts-node bin/www",
     "prd": "pm2 start bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "npm cache clean --force"
   },
   "dependencies": {
-    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
     "kcors": "^2.2.2",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",

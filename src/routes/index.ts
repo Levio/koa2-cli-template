@@ -1,21 +1,17 @@
-import Router from 'koa-router'
+import Router from "koa-router";
 
-const router = new Router()
+const router = new Router();
 
-const baseUrl = '/api/v1'
+router.prefix(`${process.env.BASE_API_PREFIX}`);
 
-router.get(`${baseUrl}/`, async (ctx, next) => {
-  ctx.body = 'Hello Koa 2!'
-})
+router.get(`/`, async (ctx, next) => {
+  ctx.body = "Hello Koa 2!";
+});
 
-router.get(`${baseUrl}/string`, async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
-
-router.get(`${baseUrl}/json`, async (ctx, next) => {
+router.get(`/json`, async (ctx, next) => {
   ctx.body = {
-    title: 'koa2 json',
-  }
-})
+    title: "koa2 json",
+  };
+});
 
-export default router
+export default router;

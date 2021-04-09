@@ -2,8 +2,6 @@ import Router from "koa-router";
 
 const router = new Router();
 
-console.log(process.env.BASE_API_PREFIX);
-
 router.prefix(`${process.env.BASE_API_PREFIX}/users`);
 
 router.get("/", function (ctx, next) {

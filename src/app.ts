@@ -2,7 +2,8 @@ import path from "path";
 import Koa from "koa";
 import json from "koa-json";
 import bodyparser from "koa-bodyparser";
-import logger from "koa-logger";
+import koaLogger from "koa-logger";
+import logger from "./logs/logger";
 import cors from "kcors";
 import { koaSwagger } from "koa2-swagger-ui";
 import yamljs from "yamljs";
@@ -25,7 +26,7 @@ app.use(json({}));
 app.use(require("koa-static")(__dirname + "/static"));
 
 // 请求日志
-app.use(logger());
+app.use(koaLogger());
 // app.use(async (ctx, next) => {
 //   const start = new Date().getTime();
 //   await next();
@@ -50,7 +51,7 @@ app.use(
 
 // error-handling
 app.on("error", (err, ctx) => {
-  console.error("server error", err, ctx);
+  logger().error("server error", err, ctx);
 });
 
 export default app;

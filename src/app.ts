@@ -1,3 +1,4 @@
+import path from "path";
 import Koa from "koa";
 const app = new Koa();
 import json from "koa-json";
@@ -5,8 +6,9 @@ import json from "koa-json";
 import bodyparser from "koa-bodyparser";
 import logger from "koa-logger";
 import cors from "kcors";
-import koaStatic from "koa-static";
-import { koaSwagger } from "koa2-swagger-ui"
+// import serve from "koa-static";
+import { koaSwagger } from "koa2-swagger-ui";
+import yamljs from "yamljs";
 
 import index from "./routes/index";
 import users from "./routes/users";
@@ -40,15 +42,15 @@ app.use(users.routes());
 app.use(users.allowedMethods());
 
 // swagger
-app.use(koaStatic('./swagger'));
+const spec = yamljs.load(path.resolve(__dirname + "/swagger/swagger.yml"));
 app.use(
   koaSwagger({
-    routePrefix: '/swagger',
+    routePrefix: "/swagger",
     swaggerOptions: {
-      url: '/swagger.yml'
-    }
-  })
-)
+      spec,
+    },
+  }),
+);
 
 // error-handling
 app.on("error", (err, ctx) => {

@@ -1,15 +1,18 @@
 import Router from "koa-router";
+import UserController from "../controllers/userController";
 
 const router = new Router();
 
 router.prefix(`${process.env.BASE_API_PREFIX}/users`);
 
-router.get("/", function (ctx, next) {
-  ctx.body = "this is a users response!";
-});
+router.get("/", UserController.listUsers);
 
-router.get("/bar", function (ctx, next) {
-  ctx.body = "this is a users/bar response";
-});
+router.post('/', UserController.addUser);
+
+router.get("/:id", UserController.showUserDetail);
+
+router.put('/:id', UserController.updateUser);
+
+router.delete('/:id', UserController.deleteUser);
 
 export default router;

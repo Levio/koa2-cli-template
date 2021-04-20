@@ -1,15 +1,31 @@
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
+
+@Entity()
 export class User {
-  id?: string;
-  name?: number;
+  @PrimaryGeneratedColumn("uuid")
+  id!: number;
 
-  constructor(data?: User) {
-    if (!data) return;
-    this.init(data);
-  }
+  @Column()
+  firstName!: string;
 
-  init(data?: User) {
-    if (!data) return;
-    this.id = data.id;
-    this.name = data.name;
-  }
+  @Column()
+  lastName!: string;
+
+  @Column()
+  age!: string;
+
+  @Column({ default: false })
+  isDeleted!: boolean;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updatedDate!: Date;
 }

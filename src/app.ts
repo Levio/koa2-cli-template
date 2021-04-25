@@ -1,7 +1,6 @@
 import path from "path";
 import Koa from "koa";
-import json from "koa-json";
-import bodyparser from "koa-bodyparser";
+import koaBody from "koa-body";
 import koaLogger from "koa-logger";
 import logger from "./logs/logger";
 import cors from "kcors";
@@ -10,19 +9,33 @@ import yamljs from "yamljs";
 
 import index from "./routes/index";
 import users from "./routes/users";
+import { checkDirExist, getUploadFileExt } from "./utils";
 
 const app = new Koa();
 
 // cors
 app.use(cors({ origin: "*" }));
 
+const upload_path = path.join(__dirname, `../public/upload/`);
+
 // 中间件
 app.use(
-  bodyparser({
-    enableTypes: ["json", "form", "text"],
+  koaBody({
+    multipart: true,
+    // encoding: "gzip",
+    formidable: {
+      uploadDir: upload_path,
+      keepExtensions: true,
+      maxFieldsSize: 2 * 1024 * 1024,
+      onFileBegin: (name, file) => {
+        const dir = upload_path;
+        checkDirExist(dir);
+        const ext = getUploadFileExt(file.path);
+        file.path = `${dir}/${name}.${ext}`;
+      },
+    },
   }),
 );
-app.use(json({}));
 app.use(require("koa-static")(__dirname + "/static"));
 
 // 请求日志
